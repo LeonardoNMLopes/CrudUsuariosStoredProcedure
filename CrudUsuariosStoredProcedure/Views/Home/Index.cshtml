@@ -1,0 +1,60 @@
+﻿@model List<Usuario>
+
+
+@if(TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-dark" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-dark" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+
+<div classe="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Registro de Usuários</h1>
+        <a asp-action="Cadastrar" asp-controller="Home" class="btn btn-success">Cadastrar Usuários</a>
+    </div>
+
+    <table class="table table-hover table-bordered mt-5">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>SobreNome</th>
+                <th>Email</th>
+                <th>Cargo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if(Model.Count > 0)
+            {
+                @foreach (var usuario in Model)
+                {
+                    <tr>
+                        <td>@usuario.Id</td>
+                        <td>@usuario.Nome</td>
+                        <td>@usuario.SobreNome</td>
+                        <td>@usuario.Email</td>
+                        <td>@usuario.Cargo</td>
+                        <td>
+                            <a asp-action="Detalhes" asp-controller="Home" asp-route-id="@usuario.Id" class="btn btn-warning">Detalhes</a>
+                            <a asp-action="Editar" asp-controller="Home" asp-route-id ="@usuario.Id" class="btn btn-info">Editar</a>
+                            <a asp-action="Remover" asp-controller="Home" asp-route-id="@usuario.Id" class="btn btn-danger">Remover</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
